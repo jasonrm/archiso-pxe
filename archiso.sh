@@ -16,30 +16,6 @@ curl -L https://github.com/jasonrm.keys -o /root/.ssh/authorized_keys
 mkdir -p /root/.gnupg/
 touch /root/.gnupg/dirmngr_ldapservers.conf
 
-cp /etc/pacman.conf /etc/pacman.conf.orig
-
-# Install archiso-zfs
-cat >> /etc/pacman.conf <<DELIM
-[demz-repo-archiso]
-Server = http://demizerone.com/\$repo/\$arch
-SigLevel = Never
-DELIM
-
-pacman -Sy --noconfirm zfs-git || exit 1
-
-# Restore original pacman config
-cp /etc/pacman.conf.orig /etc/pacman.conf
-
-# aur.atomica.net
-pacman-key -r 5EF75572
-pacman-key --lsign-key 5EF75572
-cat >> /etc/pacman.conf <<DELIM
-[atomica]
-Server = http://aur.atomica.net/\$repo/\$arch
-DELIM
-
-pacman -Sy --noconfirm git mbuffer tmux sysstat ioping pv || exit 1
-
 systemctl start sshd
 
 git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
