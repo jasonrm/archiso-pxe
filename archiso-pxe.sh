@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $(tty) == "/dev/tty1" ]]; then
+if [[ $(tty) != "/dev/tty1" ]]; then
     exit 0
 fi
 
