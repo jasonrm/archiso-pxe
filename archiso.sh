@@ -9,6 +9,8 @@ nameserver 8.8.8.8
 nameserver 8.8.4.4
 DELIM
 
+sleep 5
+
 mkdir -p /root/.ssh
 curl -L https://github.com/jasonrm.keys -o /root/.ssh/authorized_keys
 
